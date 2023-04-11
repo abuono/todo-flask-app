@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <title>To-Do en Python</title>
+    <script src="https://kit.fontawesome.com/47bd652668.js" crossorigin="anonymous"></script>
+  </head>
+</head>
+<body>
+    <nav>
+        <ul>
+            <section class="items">
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>    
+            </section>
+            <li class="logo">To-Do App</li>
+            <li class="search-icon">
+                <input type="search" placeholder="Search ToDo...">        
+                <label class="icon">
+                    <span type="submit" method="POST" class="fas fa-search search"></span>
+                </label>
+            </li>
+        </ul>
+    </nav>
+    <section class="main">
+        <h1>Bienvenido!</h1>
+    </section>
+    <section class="align-items-center">
+        <form action="/" method="POST" class="form" name="form">
+            <section class="input-div">
+                <section class="title-box">
+                    <label for="title">Enter your ToDo Title</label>
+                    <input 
+                    type="text"
+                    name="title"
+                    id="title"
+                    class="input-text"
+                    placeholder="Enter a title" required
+                    />    
+                </section>
+                <label for="description">Describe your ToDo here</label>
+                <input type="text"
+                name="description"
+                id="description"
+                class="input-text"
+                placeholder="Enter a description" required
+                />
+                <button class="action-btn add" type="submit" method="POST">Add</button>
+            </section>
+        </form>
+        <table id="lists">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created at</th>
+            </tr>
+            {%for todo in todos %}
+                <tr>
+                    <td>{{ todo.title }}</td>
+                    <td>{{ todo.description }}</td>
+                    <td>{{ todo.created_at }}</td>
+                    <td class="button-row">
+                        <a href="/update/{{todo._id}}" class="action-btn edit">Edit</a>
+                        <a href="/delete/{{todo._id}}" class="action-btn delete">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>    
+    </section>
+
+</body>
+</html>
